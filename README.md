@@ -190,3 +190,35 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 7. Read the React Route Training documentation and understand about the BrowserRouter Component:
 https://reacttraining.com/react-router/web/example/basic
+
+
+8. Add a state *isLoggedIn* to the App.js Component to know when what view to display.
+
+9. Set the default value of *isLoggedIn* to false and then add an if condition inside the render method that renders the correct view.
+
+
+## Part 3: Local Storage
+
+In order to create Web applications that work offline we can use the local storage. You can use it directly on your js files as follows:
+
+```javascript
+
+//Save data
+localStorage.setItem('key', value);
+
+//Read data
+localStorage.getItem('key');
+
+````
+  
+1. Use the local storage to store a default user (username and password).
+
+2. Add the click handler to Sign In button in order to verify that the user exists (use the one saved on the *localStorage*)
+
+3. Once the user is authenticated successfully then store the *isLoggedIn* on the storage and add the logic to make sure this value is set to state everytime the application is loaded.
+This will prevent the user authentication every time!
+
+4. Run the application and then stop the server and verify the data is persisted.
+
+Tip: You can use the Google Chrome Developer tools under the Application tab to explore the Local Storage. 
+   
