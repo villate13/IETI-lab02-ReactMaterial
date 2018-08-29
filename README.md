@@ -119,14 +119,74 @@ export class Login extends React.Component{
 
 ## Part 2: Enable App Navigation 
 
-1. Add the react-router-dom component to your package.json file and install it:
+1. Refactor your App.js: 
+    * Create a new file called TodoApp and extract all the Todo logic into this file.
+    * Change the Todo components to use react Material components: Button, TextField, Card and DatePickers.
+
+2. Add the react-router-dom component to your package.json file and install it:
 
 ```javascript
    "react-router-dom": "^4.3.1"   
-   
-   npm install
 ```
 
-2. Refactor your App.js: 
-    * Create a new file called TodoApp and extract all the Todo logic to this file.
-    * Change the Todo components to use react Material components: Button, TextField, Card and DatePickers.
+```javascript
+   npm install
+```
+        
+3. Create a constant for each View (Login and TodoApp) in the App.js file:
+
+```javascript
+  const LoginView = () => (
+      <Login/>
+  );
+  
+  const About = () => (
+      <div>
+          <NavBar/>
+          <CoursesList/>
+      </div>
+  );
+```
+
+4. Import the following Components in the App.js file:
+
+```javascript
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+```
+
+5. Add the following code to render method on the App.js:
+
+```javascript
+
+    render() {
+
+        return (
+            <Router>
+                <div className="App">
+                    <header className="App-header">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <h1 className="App-title">TODO React App</h1>
+                    </header>
+
+                    <br/>
+                    <br/>
+
+                    <ul>
+                        <li><Link to="/">Login</Link></li>
+                        <li><Link to="/todo">Todo</Link></li>
+                    </ul>
+
+                    <div>
+                        <Route exact path="/" component={LoginView}/>
+                        <Route path="/todo" component={TodoView}/>
+                    </div>
+                </div>
+            </Router>
+        );
+    }
+```
+
+6. Run the application and test that the navigation works.
+
+7. Read the React Route Training documentation and understand about the BrowserRouter Component:
+https://reacttraining.com/react-router/web/example/basic
