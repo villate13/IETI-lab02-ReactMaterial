@@ -1,6 +1,7 @@
 # React Material
 React project using Material-UI React library.
 
+###Part 1: Create a Login Component
 1.Download the repository, install and run the project to verify it works:
 
 
@@ -112,3 +113,20 @@ export class Login extends React.Component{
 }
 
 ```
+
+4. Add the Login component to the App.js render method to test your login component.
+
+
+###Part 2: Enable App Navigation 
+
+1. Add the react-router-dom component to your package.json file and install it:
+
+```javascript
+   "react-router-dom": "^4.3.1"   
+   
+   npm install
+```
+
+2. Refactor your App.js: 
+    * Create a new file called TodoApp and extract all the Todo logic to this file.
+    * Change the Todo components to use react Material components: Button, TextField, Card and DatePickers.
