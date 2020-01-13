@@ -1,4 +1,4 @@
-# 1.2 React Material
+# React Material
 React project using Material-UI React library.
 
 ## Part 1: Create a Login Component
