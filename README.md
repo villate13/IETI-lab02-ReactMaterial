@@ -1,24 +1,55 @@
-# 1.2 React Material
-React project using Material-UI React library.
+<p align="center">
+  <a href="https://material-ui.com/" rel="noopener" target="_blank"><img width="150" src="https://material-ui.com/static/logo.svg" alt="Material-UI logo"></a></p>
+</p>
+
+<h1 align="center">1.2 React Material</h1>
+
+[![npm](https://img.shields.io/badge/npm-v6.13.4-red.svg)](https://www.npmjs.com/)
+[![npx](https://img.shields.io/badge/dependencies-npx-orange)](https://www.npmjs.com/package/npx)
+[![material](https://img.shields.io/badge/dependencies-material--ui-yellow)](https://material-ui.com/)
+[![react-router](https://img.shields.io/badge/dependencies-react--router-blue)](https://reacttraining.com/react-router/)
+
+
+
+React project using Material-UI library.
 
 ## Part 1: Create a Login Component
-1.Download the repository, install and run the project to verify it works:
-
+1. Clone the repository, install and run the project to verify that it works:
 
 ```javascript
 npm install
 npm start
 ```
+Some vulnerabilities may be reported. Ignore them.
 
-2. Add the Material-UI dependencies to the package.json file and re-run the install module command.
+2. Install the `core`, `icons` and `pickers` dependencies from Material-UI to the project:
 
 ```javascript
-   "@material-ui/core": "^3.0.1",
-    "@material-ui/icons": "^3.0.1",
+npm install @material-ui/core
+npm install @material-ui/icons
+npm install @material-ui/pickers
 ```
 
-3. Create a new folder called component and add a Login.js and Login.css files with the following code:
+You can also add the Material-UI dependencies straight into the `package.json` file and re-run the `install` command.
 
+```javascript
+{
+  "name": "todo-app",
+  ...
+  "dependencies": {
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/pickers": "^3.2.10",
+    ....
+  },
+  ...
+}
+
+```
+
+3. Under `src`, create a new folder called `components` and add two files named Login.js and Login.css using the following code:
+
+> Login.js
 ```javascript
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
@@ -76,12 +107,9 @@ export class Login extends React.Component{
     }
 
 }
-
-
-
-
 ```
 
+> Login.css
 ```css
 .layout {
     width: 60%;
@@ -111,19 +139,21 @@ export class Login extends React.Component{
 .submit {
     marginTop: 20px;
 }
-
 ```
 
-4. Add the Login component to the App.js render method to test your login component.
+Read more about how to organize your components [here] (https://reactjs.org/docs/faq-structure.html)
+
+4. Add the Login component to the `App.js` render method in order to test your login component.
 
 
 ## Part 2: Enable App Navigation 
 
-1. Refactor your App.js: 
-    * Create a new file called TodoApp and extract all the Todo logic into this file.
-    * Change the Todo components to use react Material components: Button, TextField, Card and DatePickers.
+1. Refactor your `App.js`. 
+    * Create a new file called `TodoApp.js` under the `components` folder and extract all the logic of the Todo App into this file.
+    * Move the rest of the files related to the TodoApp component into the `components` folder.
+    * Change the Todo components to use react Material elements: Button, TextField, Card and DatePickers.
 
-2. Add the react-router-dom component to your package.json file and install it:
+2. Add the `react-router-dom` dependency to your `package.json` file and install it:
 
 ```javascript
    "react-router-dom": "^4.3.1"   
@@ -136,25 +166,22 @@ export class Login extends React.Component{
 3. Create a constant for each View (Login and TodoApp) in the App.js file:
 
 ```javascript
-  const LoginView = () => (
+const LoginView = () => (
       <Login/>
   );
-  
-  const About = () => (
-      <div>
-          <NavBar/>
-          <CoursesList/>
-      </div>
+
+const TodoAppView = () => (
+      <TodoApp/>
   );
 ```
 
-4. Import the following Components in the App.js file:
+4. Import the following components in the `App.js` file:
 
 ```javascript
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 ```
 
-5. Add the following code to render method on the App.js:
+5. Update the _render_ method of `App.js` including the routing logic:
 
 ```javascript
 
@@ -178,7 +205,7 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
                     <div>
                         <Route exact path="/" component={LoginView}/>
-                        <Route path="/todo" component={TodoView}/>
+                        <Route path="/todo" component={TodoAppView}/>
                     </div>
                 </div>
             </Router>
@@ -188,13 +215,15 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 6. Run the application and test that the navigation works.
 
-7. Read the React Route Training documentation and understand about the BrowserRouter Component:
+7. Read the _React Route Training_ documentation and learn about the BrowserRouter Component:
 https://reacttraining.com/react-router/web/example/basic
 
 
-8. Add a state *isLoggedIn* to the App.js Component to know when what view to display.
+8. Add a state *isLoggedIn* to the `App.js` component to know when and what view to display.
 
-9. Set the default value of *isLoggedIn* to false and then add an if condition inside the render method that renders the correct view.
+Tip: Don't attempt to use the _Redirect_ component of the React Router to handle your public and private routes. For now, it would be enough to allow or forbid the access to a _Route_ by using boolean javascript expression inside your JSX.
+
+9. Set the default value of *isLoggedIn* to false and then add a condition inside the render method that renders the correct view.
 
 
 ## Part 3: Local Storage
@@ -209,7 +238,7 @@ localStorage.setItem('key', value);
 //Read data
 localStorage.getItem('key');
 
-````
+```
   
 1. Use the local storage to store a default user (username and password).
 
