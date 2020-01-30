@@ -75,7 +75,7 @@ export class Login extends React.Component{
                         <Avatar className="avatar">
                             <LockIcon />
                         </Avatar>
-                        <Typography variant="headline">Sign in</Typography>
+                        <Typography variant="h2">Sign in</Typography>
                         <form className="form">
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -93,7 +93,7 @@ export class Login extends React.Component{
                             <Button
                                 type="submit"
                                 fullWidth
-                                variant="raised"
+                                variant="contained"
                                 color="primary"
                                 className="submit"
                             >
