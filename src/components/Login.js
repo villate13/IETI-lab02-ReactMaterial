@@ -13,6 +13,11 @@ import './Login.css'
 
 class Login extends Component{
 
+    constructor(props) {
+        super(props);
+        this.handleLogin = this.handleLogin.bind(this);
+    }
+
     render(){
         return (
             <React.Fragment>
@@ -43,6 +48,7 @@ class Login extends Component{
                                 variant="contained"
                                 color="primary"
                                 className="submit"
+                                onClick={this.handleLogin}
                             >
                                 Sign in
                             </Button>
@@ -51,6 +57,16 @@ class Login extends Component{
                 </main>
             </React.Fragment>
         );
+    }
+
+    handleLogin() {
+        console.log("Entro a iniciar");
+        if(document.getElementById("email").value!==""  && document.getElementById("password").value!==""){
+            this.props.funct(true);
+        } else {
+            console.log("Error");
+        }
+        
     }
 
 }

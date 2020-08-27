@@ -1,123 +1,78 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {TodoList} from "./TodoList";
-import DatePicker from 'react-datepicker';
+import { TodoApp } from "./components/todoapp/TodoApp";
+
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from "moment";
+
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 
 import Login from './components/Login'
+
+
+localStorage.isLoggedIn = false;
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {items: [], text: '', priority: 0, dueDate: moment()};
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.handlePriorityChange = this.handlePriorityChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {isLoggedIn: localStorage.isLoggedIn }
+        this.handleLoginApp = this.handleLoginApp.bind(this);
     }
 
-
     render() {
+        console.log(this.state.isLoggedIn);
+        const LoginView = () => (
+            <Login funct={this.handleLoginApp.bind(this)}/>
+        );
+
+        const TodoAppView = () => (
+            <TodoApp />
+        );
+
+
+        let links;
+        if (this.state.isLoggedIn) {
+            links = <div>
+                        <li><Link to="/">Logout</Link></li> 
+                        <li><Link to="/todo">Todo</Link></li>
+                    </div>;
+        } else {
+            links = <li><Link to="/">Login</Link></li>;
+        }
+
 
         return (
-            <div className="App">
-                
+            <Router>s
+                <div className="App">
+                    <header className="App-header">
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <h1 className="App-title">TODO React App</h1>
+                    </header>
 
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">TODO React App</h1>
-                </header>
+                    <br />
+                    <br />
 
-                <Login />
+                    <ul>
+                        {links}
+                    </ul>
 
-                <br/>
-                <br/>
-                <form onSubmit={this.handleSubmit} className="todo-form">
-                    <h3>New TODO</h3>
-                    <label htmlFor="text" className="right-margin">
-                        Text:
-                    </label>
-
-                    <input
-                        id="text"
-                        onChange={this.handleTextChange}
-                        value={this.state.text}>
-                    </input>
-
-                    <br/>
-                    <br/>
-                    <label htmlFor="priority" className="right-margin">
-                        Priority:
-                    </label>
-
-                    <input
-                        id="priority"
-                        type="number"
-                        onChange={this.handlePriorityChange}
-                        value={this.state.priority}>
-                    </input>
-                    <br/>
-                    <br/>
-
-                    <DatePicker
-                        id="due-date"
-                        selected={this.state.dueDate}
-                        placeholderText="Due date"
-                        onChange={this.handleDateChange}>
-                    </DatePicker>
-                    <br/>
-                    <button>
-                        Add #{this.state.items.length + 1}
-                    </button>
-                </form>
-                <br/>
-                <br/>
-                <TodoList todoList={this.state.items}/>
-            </div>
+                    <div>
+                        <Route path="/todo" component={TodoAppView} />
+                        <Route exact path="/" component={LoginView} />
+                    </div>
+                </div>
+            </Router>
         );
     }
 
-    handleTextChange(e) {
+    handleLoginApp(ans) {
         this.setState({
-            text: e.target.value
+            isLoggedIn: ans
         });
+        window.location.replace("/todo")
     }
 
-    handlePriorityChange(e) {
-        this.setState({
-            priority: e.target.value
-        });
-    }
-
-    handleDateChange(date) {
-        this.setState({
-            dueDate: date
-        });
-    }
-
-    handleSubmit(e) {
-
-        e.preventDefault();
-
-        if (!this.state.text.length || !this.state.priority.length || !this.state.dueDate)
-            return;
-
-        const newItem = {
-            text: this.state.text,
-            priority: this.state.priority,
-            dueDate: this.state.dueDate,
-
-        };
-        this.setState(prevState => ({
-            items: prevState.items.concat(newItem),
-            text: '',
-            priority: '',
-            dueDate: ''
-        }));
-    }
 
 }
 

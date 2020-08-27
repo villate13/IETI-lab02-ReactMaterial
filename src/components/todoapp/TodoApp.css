@@ -1,0 +1,12 @@
+.saveButton {
+    width: 100%;
+}
+
+.card_Large{
+    min-height: 100px;
+}
+
+.div_portada{
+    max-height: 100px;
+    background-image: url(../../resources/fondo.jpg); height: 200px; border: 1px solid black;
+}
