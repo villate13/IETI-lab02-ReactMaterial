@@ -10,7 +10,9 @@ import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import Login from './components/Login'
 
 
-localStorage.isLoggedIn = false;
+
+localStorage.email = "villa@gmail.com";
+localStorage.pd = "v13";
 
 class App extends Component {
 
@@ -49,10 +51,6 @@ class App extends Component {
                         <img src={logo} className="App-logo" alt="logo" />
                         <h1 className="App-title">TODO React App</h1>
                     </header>
-
-                    <br />
-                    <br />
-
                     <ul>
                         {links}
                     </ul>
@@ -67,10 +65,14 @@ class App extends Component {
     }
 
     handleLoginApp(ans) {
+        localStorage.isLoggedIn = ans;
         this.setState({
             isLoggedIn: ans
         });
-        window.location.replace("/todo")
+        if(ans){
+            window.location.replace("/todo")
+        }
+        
     }
 
 

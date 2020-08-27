@@ -61,10 +61,12 @@ class Login extends Component{
 
     handleLogin() {
         console.log("Entro a iniciar");
-        if(document.getElementById("email").value!==""  && document.getElementById("password").value!==""){
+        if(document.getElementById("email").value===localStorage.email  && document.getElementById("password").value===localStorage.pd){
             this.props.funct(true);
+            
         } else {
             console.log("Error");
+            this.props.funct(false);
         }
         
     }
