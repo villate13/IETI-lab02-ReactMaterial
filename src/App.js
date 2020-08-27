@@ -6,6 +6,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from "moment";
 
+import Login from './components/Login'
+
 class App extends Component {
 
     constructor(props) {
@@ -22,10 +24,14 @@ class App extends Component {
 
         return (
             <div className="App">
+                
+
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">TODO React App</h1>
                 </header>
+
+                <Login />
 
                 <br/>
                 <br/>
